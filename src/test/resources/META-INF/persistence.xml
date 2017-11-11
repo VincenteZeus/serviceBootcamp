@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+    <persistence-unit name="tpJpa-mysql" transaction-type="RESOURCE_LOCAL">
+        <!-- shouldn't be valid for java SE per specification, but it works for EclipseLink ... -->
+		
+							<!--   BASE DE DONNEES MYSQL  -->
+        <properties>
+
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_bootcamp" />
+            <property name="javax.persistence.jdbc.user" value="fbr" />
+            <property name="javax.persistence.jdbc.password" value="amuztadji" />
+            <property name="javax.persistence.schema-generation.create-database-schemas" value="true"/>
+            <!-- EclipseLink should create the database schema automatically -->
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="eclipselink.ddl-generation" value="create-tables" />
+            <property name="eclipselink.logging.level" value="ALL"/>
+        </properties>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        
+    <class>com.bootcamp.jpa.entities.Bailleur</class>
+    <class>com.bootcamp.jpa.entities.BailleurProgramme</class>
+    <class>com.bootcamp.jpa.entities.Beneficiaire</class>
+    <class>com.bootcamp.jpa.entities.BeneficiaireProgramme</class>
+    <class>com.bootcamp.jpa.entities.Fournisseur</class>
+    <class>com.bootcamp.jpa.entities.FournisseurProgramme</class>
+    <class>com.bootcamp.jpa.entities.IndicateurPerformance</class>
+    <class>com.bootcamp.jpa.entities.IndicateurQualitatif</class>
+    <class>com.bootcamp.jpa.entities.IndicateurQuantitatif</class>
+    <class>com.bootcamp.jpa.entities.Livrable</class>
+    <class>com.bootcamp.jpa.entities.Programme</class>
+    <class>com.bootcamp.jpa.entities.Projet</class>
+    <class>com.bootcamp.jpa.entities.Personne</class>
+
+    </persistence-unit>
+	
+							<!-- BASE DE DONNEES DERBY-->
+							
+	<persistence-unit name="tpJpa-derby" transaction-type="RESOURCE_LOCAL">
+        
+        <properties>
+
+            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample" />
+            <property name="javax.persistence.jdbc.user" value="app" />
+            <property name="javax.persistence.jdbc.password" value="app" />
+            <property name="javax.persistence.schema-generation.create-database-schemas" value="true"/>
+            <!-- EclipseLink should create the database schema automatically -->
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="eclipselink.ddl-generation" value="create-tables" />
+            <property name="eclipselink.logging.level" value="ALL"/>
+        </properties>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        
+    <class>com.bootcamp.jpa.entities.Bailleur</class>
+    <class>com.bootcamp.jpa.entities.BailleurProgramme</class>
+    <class>com.bootcamp.jpa.entities.Beneficiaire</class>
+    <class>com.bootcamp.jpa.entities.BeneficiaireProgramme</class>
+    <class>com.bootcamp.jpa.entities.Fournisseur</class>
+    <class>com.bootcamp.jpa.entities.FournisseurProgramme</class>
+    <class>com.bootcamp.jpa.entities.IndicateurPerformance</class>
+    <class>com.bootcamp.jpa.entities.IndicateurQualitatif</class>
+    <class>com.bootcamp.jpa.entities.IndicateurQuantitatif</class>
+    <class>com.bootcamp.jpa.entities.Livrable</class>
+    <class>com.bootcamp.jpa.entities.Programme</class>
+    <class>com.bootcamp.jpa.entities.Projet</class>
+    <class>com.bootcamp.jpa.entities.Personne</class>
+
+    </persistence-unit>
+	
+</persistence>
