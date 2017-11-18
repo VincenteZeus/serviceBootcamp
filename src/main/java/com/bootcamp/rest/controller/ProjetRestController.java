@@ -61,17 +61,12 @@ import org.apache.directory.ldap.client.api.LdapNetworkConnection;
 public class ProjetRestController {
     
     ProjetRepository pr = new ProjetRepository("tpRest-mysql");
-        
     List<Projet> liste = new ArrayList<Projet>();
-        
     Response resp;
-    
     Field[] fieldsProjet = returnProperties(Projet.class);
-    
     JavaJsonWebToken jt = new JavaJsonWebToken();
     
     private static Entry entry = new DefaultEntry();
-    
     // service qui recoi les infos de l'authentifiation et les retourne. 
     
     @POST
@@ -92,9 +87,7 @@ public class ProjetRestController {
     public Entry authentification(String sn) throws LdapException, CursorException, IOException{
         LdapConnection connection = new LdapNetworkConnection( "localhost", 10389 );
         connection.bind( "uid=admin,ou=system", "secret" );
-        
         Entry resultEntry = new DefaultEntry();
-        
         Attribute a = new DefaultAttribute("userPassword");
         
         // Create the SearchRequest object
@@ -108,38 +101,34 @@ public class ProjetRestController {
     // Process the request
     SearchCursor searchCursor = connection.search( req );
     
-     while ( searchCursor.next() )
-    {
+     while (searchCursor.next()) {
         org.apache.directory.api.ldap.model.message.Response response = searchCursor.get();
 
         // process the SearchResultEntry
-        if ( response instanceof SearchResultEntry )
-        {
-            resultEntry =  ( ( SearchResultEntry ) response ).getEntry();
+        if (response instanceof SearchResultEntry) {
+            resultEntry =  ((SearchResultEntry)response).getEntry();
             generateToken(resultEntry);
             //return resultEntry;
         }
     }
      connection.unBind();
      connection.close();
-        
         return resultEntry;
     }
     
-    public String generateToken(Entry entry) throws LdapInvalidAttributeValueException{
+    public String generateToken(Entry entry) throws LdapInvalidAttributeValueException {
         
         String iat = "BootcampToken";
         long tm = 900000; // 15 min
-             
             try {          
                 String subject = entry.toString();
                 String token = jt.createJWT(iat, subject, tm);
                 entry.put("ou", token);
                 resp = SuccessMessage.message("TOKEN BIEN GENERE");
-        } catch (Exception e) {
+            } catch (Exception e) {
                 resp = TokenNotGenerateException.generateTokenException();
-         }
-       return entry.get("ou").getString();  
+            }
+        return entry.get("ou").getString();
     }
     
     public Entry getEntry(){
@@ -153,9 +142,7 @@ public class ProjetRestController {
     public String getToken() throws LdapInvalidAttributeValueException{
         return getEntry().get("ou").getString();
     }
-    
-    
-    
+
     // Services qui renvoie la liste des projets suivants les criteres de trie,
     //de filtre ou de pagination envoyé par l'user suivant un format donnee
     @POST
@@ -185,8 +172,7 @@ public class ProjetRestController {
                 return Response.status(200).entity(liste).build();
             } catch (Exception e) {
                 resp=UnknownException.unknownException(e);
-            } 
-             
+            }
         }
               
         return resp;
@@ -226,7 +212,6 @@ public class ProjetRestController {
             }
         }
         }
-        
     }
                 
         return resp;

@@ -1,5 +1,0 @@
-<html>
-<body>
-<h2>CREATION DES CRRUD DE LA CLASSE PROJET PAR FEBRON BIGNON AWI!</h2>
-</body>
-</html>
